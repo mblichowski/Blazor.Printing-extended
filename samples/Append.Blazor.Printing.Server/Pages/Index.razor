@@ -4,6 +4,27 @@
 
 <h1>Hello, world!</h1>
 
+<div style="display: none;">
+    <div id="div-to-print">
+        <p style="font-size: xx-large;">xx-large text</p>
+        <p style="font-size: xx-small;">xx-small text</p>
+    </div>
+</div>
+
 <button @onclick="@(()=> PrintingService.Print("docs/sample.pdf"))">
     Print PDF
 </button>
+
+<button @onclick="@(()=> PrintingService.Print(_printHtmlSettings))">
+    Print Html
+</button>
+
+@code {
+    private readonly PrintOptions _printHtmlSettings = new() 
+    { 
+        Printable = "div-to-print",
+        Type = PrintType.Html,
+        IgnoreElements = Array.Empty<string>(),
+        OverrideDefaultFontSize = true
+    };
+}
